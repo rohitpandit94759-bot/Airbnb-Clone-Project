@@ -3,23 +3,24 @@ const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
     title: {
-       type: string,
-       required: true,
+        type: String,
+        required: true,
     },
-    description: string,
+    description: String,
     image: {
-       type: string,
-       set: (v) =>
-       v=== ""?
-        " https://unsplash.com/photos/cowboy-hat-on-wooden-fence-with-monument-valley-in-background-zlIEaRjDo_Q" 
-        : v,
+        type: String,
+        default: "https://unsplash.com/photos/cowboy-hat-on-wooden-fence-with-monument-valley-in-background-zlIEaRjDo_Q",
+        set: (v) =>
+            v === "" ?
+                " https://unsplash.com/photos/cowboy-hat-on-wooden-fence-with-monument-valley-in-background-zlIEaRjDo_Q"
+                : v,
     },
-    price: number,
-    location: string,
-    country: string
+    price: Number,
+    location: String,
+    country: String
 });
 
 
 
-const Listing = mongoose.models("Listing",listingSchema); 
-module.export =  Listing;
+const Listing = mongoose.model("Listing", listingSchema);
+module.exports = Listing;

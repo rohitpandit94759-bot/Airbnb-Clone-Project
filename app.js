@@ -3,7 +3,7 @@ const app = express();                                                          
 
 const mongoose = require("mongoose");                                                  // Import mongoose for MongoDB connection
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-const listing = require("../models/listing.js");
+const Listing = require("./models/listing");
 
 // Route for the home page
 app.get("/", (req, res) => {
@@ -27,10 +27,20 @@ async function main() {
 }
 
 
-app.get("/testListing", (req, res) =>{
+app.get("/testListing", async(req, res) =>{
 
+    let sampleListing = new Listing({
+        title: "MY New Villa",
+        description: "By the beach",
+        price: 1200,
+        Location: "Calangute, Goa",
+        country: "India",
+    });
 
-})
+    await sampleListing.save();
+    console.log("sample was saved ");
+    res.send("successful testing");
+});
 
 
 // Start server on port 8080
