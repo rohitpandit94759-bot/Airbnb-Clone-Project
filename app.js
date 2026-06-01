@@ -26,21 +26,26 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
-
-app.get("/testListing", async(req, res) =>{
-
-    let sampleListing = new Listing({
-        title: "MY New Villa",
-        description: "By the beach",
-        price: 1200,
-        Location: "Calangute, Goa",
-        country: "India",
+app.get("/Listings",(req,res)=>{
+    Listing.find({}).then((res)=>{
+        console.log(res);
     });
-
-    await sampleListing.save();
-    console.log("sample was saved ");
-    res.send("successful testing");
 });
+
+// app.get("/testListing", async(req, res) =>{
+
+//     let sampleListing = new Listing({
+//         title: "MY New Villa",
+//         description: "By the beach",
+//         price: 1200,
+//         Location: "Calangute, Goa",
+//         country: "India",
+//     });
+
+//     await sampleListing.save();
+//     console.log("sample was saved ");
+//     res.send("successful testing");
+// });
 
 
 // Start server on port 8080

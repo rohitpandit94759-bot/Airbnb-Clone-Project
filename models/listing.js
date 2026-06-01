@@ -7,14 +7,21 @@ const listingSchema = new Schema({
         required: true,
     },
     description: String,
-    image: {
+   image: {
+    filename: String,
+
+    url: {
         type: String,
-        default: "https://unsplash.com/photos/cowboy-hat-on-wooden-fence-with-monument-valley-in-background-zlIEaRjDo_Q",
+
+        default:
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+
         set: (v) =>
-            v === "" ?
-                " https://unsplash.com/photos/cowboy-hat-on-wooden-fence-with-monument-valley-in-background-zlIEaRjDo_Q"
+            v === ""
+                ? "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
                 : v,
     },
+},
     price: Number,
     location: String,
     country: String
