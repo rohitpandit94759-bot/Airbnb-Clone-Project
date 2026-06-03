@@ -4,11 +4,9 @@ const app = express();                                                          
 const mongoose = require("mongoose");                                                  // Import mongoose for MongoDB connection
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const Listing = require("./models/listing");
+const path = require("path");
 
-// Route for the home page
-app.get("/", (req, res) => {
-    res.send("HI I am root");
-});
+
 
 
 // Connect to MongoDB
@@ -26,11 +24,22 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
-app.get("/Listings",(req,res)=>{
-    Listing.find({}).then((res)=>{
-        console.log(res);
-    });
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+// Route for the home page
+app.get("/", (req, res) => {
+    res.send("HI I am root");
 });
+
+app.get("/Listings",async (req,res)=>{
+   const allListings = await Listing.find({});
+   res.render("listings/index", {allListings});
+});
+
+
+
 
 // app.get("/testListing", async(req, res) =>{
 
